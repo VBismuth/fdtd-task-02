@@ -60,7 +60,7 @@ if p.exists():
   with res.open('w') as fl:
     i = 0
     for x in f:
-      fl.write('%11.10f    %.10f\n' % (x, sigma[i]))
+      fl.write('%20f   %.20f\n' % (x, sigma[i]))
       i += 1
 else:
   print("Error: \'results\' dir does not exists - access denied")
@@ -72,9 +72,9 @@ plt.ylabel('$\sigma, м^2$')
 plt.grid()
 plt.show()
 
-a0 = 4
+'''a0 = 4
 f_tst = c * a0 / (2*pi*r)
 s_tst = f_sigma(f_tst)/(pi * r * r)
 l = 2 * pi * r * f_tst / c
-print(l, s_tst)
+print(l, s_tst)'''
 
