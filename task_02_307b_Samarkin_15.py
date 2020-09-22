@@ -3,11 +3,28 @@ from scipy.special import spherical_jn as jn, spherical_yn as yn
 import numpy as np
 from pathlib import Path as pth
 import matplotlib.pyplot as plt
+from urllib.request  import urlopen as uopn
+import re
 
-#Тестовые переменные
-D = 15e-3
-fmin = 0.01e9
-fmax = 45e9
+tsk_v = 17 #Вариант задания
+#Загрузка файла задания
+txt = uopn('https://jenyay.net/uploads/Student/Modelling/task_02.txt').read()
+f1 = open('./taskfile.txt', 'wb')
+f1.write(txt)
+f1.close()
+
+#Использование файла
+f2 = open('./taskfile.txt')
+line = [x for x in f2]
+p = re.compile(r'[0-9\.\-e]+')
+m = p.findall(line[tsk_v-1])
+print(m[1:])
+f2.close()
+
+#Присвоение переменных
+D = float(m[1])
+fmin = float(m[2])
+fmax = float(m[3])
 
 f = np.linspace(fmin, fmax, 400)
 r = D/2
@@ -54,4 +71,10 @@ plt.xlabel('f, ГГц')
 plt.ylabel('$\sigma, м^2$')
 plt.grid()
 plt.show()
+
+a0 = 4
+f_tst = c * a0 / (2*pi*r)
+s_tst = f_sigma(f_tst)/(pi * r * r)
+l = 2 * pi * r * f_tst / c
+print(l, s_tst)
 
