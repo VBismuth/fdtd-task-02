@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from urllib.request  import urlopen as uopn
 import re
 
-tsk_v = 17 #Вариант задания
+tsk_v = 15 #Вариант задания
 #Загрузка файла задания
 txt = uopn('https://jenyay.net/uploads/Student/Modelling/task_02.txt').read()
 f1 = open('./taskfile.txt', 'wb')
