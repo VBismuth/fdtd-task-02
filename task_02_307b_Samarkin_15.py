@@ -8,18 +8,23 @@ import re
 
 tsk_v = 15 #Вариант задания
 #Загрузка файла задания
-txt = uopn('https://jenyay.net/uploads/Student/Modelling/task_02.txt').read()
-f1 = open('./taskfile.txt', 'wb')
-f1.write(txt)
-f1.close()
+pfile = pth('./taskfile.txt')
+if not pfile.exists():
+    txt = uopn('https://jenyay.net/uploads/Student/Modelling/task_02.txt').read()
+    f1 = pfile.open('wb')
+    f1.write(txt)
+    f1.close()
 
 #Использование файла
-f2 = open('./taskfile.txt')
-line = [x for x in f2]
-p = re.compile(r'[0-9\.\-e]+')
-m = p.findall(line[tsk_v-1])
-print(m[1:])
-f2.close()
+if pfile.exists():
+    f2 = pfile.open()
+    line = [x for x in f2]
+    p = re.compile(r'[0-9\.\-e]+')
+    m = p.findall(line[tsk_v-1])
+    print(m[1:])
+    f2.close()
+else:
+    print("Error - file does not exist")
 
 #Присвоение переменных
 D = float(m[1])
@@ -45,7 +50,7 @@ def f_sigma(x):
     k = 2 * pi / lmbd #Волновое число
     kr = k*r
     Sum = 0+0j
-    for n in range(1, 45):
+    for n in range(1, 40):
         Sum += (-1 ** n) * (n + 1/2) * (bn(n, kr) - an(n, kr))
     return ((lmbd**2) / pi) * (np.abs(Sum)**2) 
 
