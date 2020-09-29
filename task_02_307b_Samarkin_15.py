@@ -51,7 +51,7 @@ def f_sigma(x):
     kr = k*r
     Sum = 0+0j
     for n in range(1, 40):
-        Sum += (-1 ** n) * (n + 1/2) * (bn(n, kr) - an(n, kr))
+        Sum += ((-1) ** n) * (n + 1/2) * (bn(n, kr) - an(n, kr))
     return ((lmbd**2) / pi) * (np.abs(Sum)**2) 
 
 sigma = [f_sigma(x) for x in f]
